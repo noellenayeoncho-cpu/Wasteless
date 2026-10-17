@@ -30,6 +30,7 @@
 
 <div id="posts"></div>
 
+
 <script>
     function togglePost() {
         const popup = document.getElementById("post-popup");
@@ -43,14 +44,30 @@
 
         if (text === "") return;
 
-        const post = document.createElement("div");
-        post.className = "simple-post";
-        post.textContent = text;
+        let posts = JSON.parse(localStorage.getItem("donationPosts") || "[]");
+        posts.unshift(text);
+        localStorage.setItem("donationPosts", JSON.stringify(posts));
 
-        document.getElementById("posts").prepend(post);
         input.value = "";
         document.getElementById("post-popup").style.display = "none";
+        showPosts();
     }
+
+    function showPosts() {
+        const container = document.getElementById("posts");
+        const posts = JSON.parse(localStorage.getItem("donationPosts") || "[]");
+
+        container.innerHTML = "";
+
+        posts.forEach(function(text) {
+            const post = document.createElement("div");
+            post.className = "simple-post";
+            post.textContent = text;
+            container.appendChild(post);
+        });
+    }
+
+    showPosts();
 </script>
 
 
