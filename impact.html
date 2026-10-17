@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteLess</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>WasteLess</h1>
+    </header>
+
+     <nav>
+        <a href="main.html">Home</a>
+        <a href="needs.html">Needs</a>
+        <a href="matches.html">Matches</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html">Login</a>
+        <a href="update.html">Update</a>
+        <a href="donate.html">Donate</a>
+    </nav>
+    <h2>Impact</h2>
+    <script>
+        function togglePost(){
+            const popup = document.getElementById("post-popup");
+            popup.style.display = popup.style.display === "block" ? "none" : "block";
+        }
+        function addPost(){
+            const input=document.getElementById("post-text");
+            const text=input.value.trim();
+            if(text==="") return;
+            let posts=JSON.parse(localStorage.getItem("impactPosts") || "[]");
+            posts.unshift(text);
+            localStorage.setItem("impactPosts", JSON.stringify(posts));
+            input.value="";
+            document.getElementById("post-popup").style.display="none";
+            showPosts();
+
+        }
+        function showPosts(){
+            const container=document.getElementById("posts");
+            const posts = JSON.parse(localStorage.getItem("needPosts") || "[]");
+
+        container.innerHTML = "";
+
+        posts.forEach(function(text) {
+            const post = document.createElement("div");
+            post.className = "simple-post";
+
+            const description = document.createElement("p");
+            description.textContent = text;
+
+            const contact = document.createElement("a");
+            contact.className = "contact-button";
+            contact.href = "mailto:YOUR_EMAIL@example.com?subject=" +
+                encodeURIComponent("WasteLess Food Request");
+            contact.textContent = "Contact Poster ✉️";
+
+            post.appendChild(description);
+            post.appendChild(contact);
+            container.appendChild(post);
+        });
+    }
+
+    showPosts();
+</script>

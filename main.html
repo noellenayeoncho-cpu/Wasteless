@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WasteLess</title>
+    <title>Needs | WasteLess</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,27 +21,66 @@
         <a href="donate.html">Donate</a>
     </nav>
 
-    <main>
-        <section class="welcome">
-            <h2>Welcome to WasteLess!</h2>
+    <h2>Needs</h2>
 
-            <p>
-                Welcome! Do you want to donate or get any donations?
-            </p>
+    <button class="floating-add" onclick="togglePost()">+</button>
 
-            <div class="welcome-buttons">
-                <button onclick="window.location.href='donate.html'">
-                    Donate!
-                </button>
+    <div id="post-popup" class="post-popup" style="display: none;">
+        <h3>Share a Need</h3>
+        <textarea id="post-text" placeholder="Got a necessity?"></textarea>
+        <button onclick="addPost()">Post</button>
+    </div>
 
-                <button onclick="window.location.href='needs.html'">
-                    Get Donations
-                </button>
-            </div>
-             <img src="images/recycle.png" alt="recycle" class="welcome-image">
+    <div id="posts"></div>
 
-        </section>
-    </main>
+    <script>
+        function togglePost() {
+            const popup = document.getElementById("post-popup");
+            popup.style.display =
+                popup.style.display === "block" ? "none" : "block";
+        }
 
+        function addPost() {
+            const input = document.getElementById("post-text");
+            const text = input.value.trim();
+
+            if (text === "") return;
+
+            let posts = JSON.parse(localStorage.getItem("needPosts") || "[]");
+            posts.unshift(text);
+            localStorage.setItem("needPosts", JSON.stringify(posts));
+
+            input.value = "";
+            document.getElementById("post-popup").style.display = "none";
+            showPosts();
+        }
+
+        function showPosts() {
+            const container = document.getElementById("posts");
+            const posts = JSON.parse(localStorage.getItem("needPosts") || "[]");
+
+            container.innerHTML = "";
+
+            posts.forEach(function(text) {
+                const post = document.createElement("div");
+                post.className = "simple-post";
+
+                const description = document.createElement("p");
+                description.textContent = text;
+
+                const contact = document.createElement("a");
+                contact.className = "contact-button";
+                contact.href = "mailto:YOUR_EMAIL@example.com?subject=" +
+                    encodeURIComponent("WasteLess Food Request");
+                contact.textContent = "Contact Poster ✉️";
+
+                post.appendChild(description);
+                post.appendChild(contact);
+                container.appendChild(post);
+            });
+        }
+
+        showPosts();
+    </script>
 </body>
 </html>

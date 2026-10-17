@@ -1,35 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WasteLess</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>WasteLess</h1>
-    </header>
-
-     <nav>
-        <a href="main.html">Home</a>
-        <a href="needs.html">Needs</a>
-        <a href="matches.html">Matches</a>
-        <a href="profile.html">Profile</a>
-        <a href="login.html">Login</a>
-        <a href="update.html">Update</a>
-        <a href="donate.html">Donate</a>
-    </nav>
-    <h2> Needs</h2>
-<button class="floating-add" onclick="togglePost()">+</button>
-
-<div id="post-popup" class="post-popup">
-    <h3>Share a Need</h3>
-    <textarea id="post-text" placeholder="Got a necessity?"></textarea>
-    <button onclick="addPost()">Post</button>
-</div>
-
-<div id="posts"></div>
-
 <script>
     function togglePost() {
         const popup = document.getElementById("post-popup");
@@ -49,6 +17,7 @@
 
         input.value = "";
         document.getElementById("post-popup").style.display = "none";
+
         showPosts();
     }
 
@@ -61,8 +30,19 @@
         posts.forEach(function(text) {
             const post = document.createElement("div");
             post.className = "simple-post";
-            post.textContent = text;
-            container.prepend(post);
+
+            const description = document.createElement("p");
+            description.textContent = text;
+
+            const contact = document.createElement("a");
+            contact.className = "contact-button";
+            contact.href = "mailto:yourname@gmail.com?subject=" +
+                encodeURIComponent("WasteLess Request");
+            contact.textContent = "Contact Poster ✉️";
+
+            post.appendChild(description);
+            post.appendChild(contact);
+            container.appendChild(post);
         });
     }
 
