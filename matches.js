@@ -16,16 +16,7 @@ function getFoodName(item) {
         item.item ||
         item.title ||
         ""
-    ).trim().toLowerCase();
-}
-
-function getQuantity(item) {
-    return Number(
-        item.quantity ??
-        item["food-quantity"] ??
-        item.amount ??
-        0
-    );
+    ).trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 function getLocation(item) {
@@ -33,7 +24,7 @@ function getLocation(item) {
         item.location ||
         item["food-location"] ||
         ""
-    ).trim().toLowerCase();
+    ).trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 function findMatches() {

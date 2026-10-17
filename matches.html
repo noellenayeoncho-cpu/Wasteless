@@ -17,7 +17,6 @@
         <a href="matches.html">Matches</a>
         <a href="profile.html">Profile</a>
         <a href="login.html">Login</a>
-        <a href="update.html">Update</a>
         <a href="donate.html">Donate</a>
     </nav>
 
@@ -122,6 +121,81 @@
                 need.textContent = "Need: " + match.need;
 
                 card.append(heading, donation, need);
+                const impactKey = donation.textContent + "|" + need.textContent;
+
+const impactSection = document.createElement("div");
+impactSection.className = "impact-section";
+const impactHeading = document.createElement("h3");
+impactHeading.textContent = "How it helped:";
+
+const impactDescription = document.createElement("p");
+impactDescription.textContent = " ";
+const impactInput = document.createElement("textarea");
+impactInput.placeholder = "How it helped...";
+impactInput.rows = 3;
+const impactButton = document.createElement("button");
+
+impactButton.textContent = "Update";
+
+const impactList = document.createElement("div");
+
+function displayImpactUpdates() {
+    impactList.innerHTML = "";
+
+    const allUpdates = JSON.parse(
+        localStorage.getItem("impactUpdates") || "{}"
+    );
+
+    (allUpdates[impactKey] || []).forEach(function(update) {
+        const updateCard = document.createElement("div");
+        updateCard.className = "impact-update";
+
+        const updateText = document.createElement("p");
+        updateText.textContent = update.text;
+
+        const updateDate = document.createElement("small");
+        updateDate.textContent = update.date;
+
+        updateCard.append(updateText, updateDate);
+        impactList.appendChild(updateCard);
+    });
+}
+
+impactButton.addEventListener("click", function() {
+    const message = impactInput.value.trim();
+
+    if (!message) {
+        alert("Please write an impact update first.");
+        return;
+    }
+
+    const allUpdates = JSON.parse(
+        localStorage.getItem("impactUpdates") || "{}"
+    );
+
+    if (!allUpdates[impactKey]) {
+        allUpdates[impactKey] = [];
+    }
+
+    allUpdates[impactKey].push({
+        text: message,
+        date: new Date().toLocaleDateString()
+    });
+
+    localStorage.setItem("impactUpdates", JSON.stringify(allUpdates));
+
+    impactInput.value = "";
+    displayImpactUpdates();
+});
+impactSection.append(
+    impactHeading,
+    impactDescription,
+    impactInput,
+    impactButton,
+    impactList
+);
+card.appendChild(impactSection);
+displayImpactUpdates();
                 container.appendChild(card);
             });
         }

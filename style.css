@@ -141,7 +141,7 @@ button:hover {
     box-shadow: 0 5px 12px rgba(33, 78, 52, 0.15);
 }
 
-body > h2 {
+body > h1 {
     text-align: center;
     color: #214e34;
     font-size: 32px;
