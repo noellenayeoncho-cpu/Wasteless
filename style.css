@@ -111,6 +111,43 @@ button:hover {
     border-radius: 12px;
 }
 
+.main-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin: 40px auto;
+    flex-wrap: wrap;
+}
+
+.main-btn {
+    display: inline-block;
+    background-color: #38784c;
+    color: white;
+    text-decoration: none;
+    padding: 18px 40px;
+    border: 2px solid #38784c;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.main-btn:hover {
+    background-color: white;
+    color: #38784c;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(33, 78, 52, 0.15);
+}
+
+body > h2 {
+    text-align: center;
+    color: #214e34;
+    font-size: 32px;
+    margin-top: 50px;
+}
+
 .welcome-image {
     display: block;
     width: 250px;
