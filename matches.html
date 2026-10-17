@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,9 +21,12 @@
         <a href="donate.html">Donate</a>
     </nav>
 
-    <h2>Matches</h2>
+    <main>
+        <h2>Matches</h2>
+        <p>Connecting donations with people who need them!</p>
 
-    <div id="matches-list"></div>
+        <div id="matches-list"></div>
+    </main>
 
     <script>
         function getSavedData(key) {
@@ -34,6 +38,21 @@
             }
         }
 
+        function getPostText(post) {
+            if (typeof post === "string") {
+                return post;
+            }
+
+            return String(
+                post.text ||
+                post.description ||
+                post.food ||
+                post.name ||
+                post.item ||
+                ""
+            );
+        }
+
         function findMatches() {
             let donations = getSavedData("donationPosts");
             let needs = getSavedData("needPosts");
@@ -41,19 +60,18 @@
 
             donations.forEach(function(donation) {
                 needs.forEach(function(need) {
-                    let donationText = typeof donation === "string"
-                        ? donation
-                        : donation.text || "";
+                    let donationText = getPostText(donation);
+                    let needText = getPostText(need);
 
-                    let needText = typeof need === "string"
-                        ? need
-                        : need.text || "";
+                    let donationWords = donationText.toLowerCase()
+                        .match(/[a-z0-9]+/g) || [];
 
-                    let donationWords = donationText.toLowerCase().match(/[a-z0-9]+/g) || [];
-                    let needWords = needText.toLowerCase().match(/[a-z0-9]+/g) || [];
+                    let needWords = needText.toLowerCase()
+                        .match(/[a-z0-9]+/g) || [];
 
                     let commonWords = donationWords.filter(function(word) {
-                        return word.length > 2 && needWords.includes(word);
+                        return word.length > 2 &&
+                            needWords.includes(word);
                     });
 
                     if (commonWords.length > 0) {
@@ -75,12 +93,18 @@
             container.innerHTML = "";
 
             if (matches.length === 0) {
-                container.innerHTML = `
-                    <div class="match-card">
-                        <h3>No matches yet!</h3>
-                        <p>Matching donation and need posts will appear here.</p>
-                    </div>
-                `;
+                let message = document.createElement("div");
+                message.className = "match-card";
+
+                let heading = document.createElement("h3");
+                heading.textContent = "No matches yet!";
+
+                let description = document.createElement("p");
+                description.textContent =
+                    "When donations match people's needs, they will appear here.";
+
+                message.append(heading, description);
+                container.appendChild(message);
                 return;
             }
 

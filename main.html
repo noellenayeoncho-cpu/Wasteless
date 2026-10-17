@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+<head>    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Needs | WasteLess</title>
+    <title>WasteLess</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +10,7 @@
         <h1>WasteLess</h1>
     </header>
 
-    <nav>
+     <nav>
         <a href="main.html">Home</a>
         <a href="needs.html">Needs</a>
         <a href="matches.html">Matches</a>
@@ -20,67 +19,8 @@
         <a href="update.html">Update</a>
         <a href="donate.html">Donate</a>
     </nav>
-
-    <h2>Needs</h2>
-
-    <button class="floating-add" onclick="togglePost()">+</button>
-
-    <div id="post-popup" class="post-popup" style="display: none;">
-        <h3>Share a Need</h3>
-        <textarea id="post-text" placeholder="Got a necessity?"></textarea>
-        <button onclick="addPost()">Post</button>
-    </div>
-
-    <div id="posts"></div>
-
-    <script>
-        function togglePost() {
-            const popup = document.getElementById("post-popup");
-            popup.style.display =
-                popup.style.display === "block" ? "none" : "block";
-        }
-
-        function addPost() {
-            const input = document.getElementById("post-text");
-            const text = input.value.trim();
-
-            if (text === "") return;
-
-            let posts = JSON.parse(localStorage.getItem("needPosts") || "[]");
-            posts.unshift(text);
-            localStorage.setItem("needPosts", JSON.stringify(posts));
-
-            input.value = "";
-            document.getElementById("post-popup").style.display = "none";
-            showPosts();
-        }
-
-        function showPosts() {
-            const container = document.getElementById("posts");
-            const posts = JSON.parse(localStorage.getItem("needPosts") || "[]");
-
-            container.innerHTML = "";
-
-            posts.forEach(function(text) {
-                const post = document.createElement("div");
-                post.className = "simple-post";
-
-                const description = document.createElement("p");
-                description.textContent = text;
-
-                const contact = document.createElement("a");
-                contact.className = "contact-button";
-                contact.href = "mailto:YOUR_EMAIL@example.com?subject=" +
-                    encodeURIComponent("WasteLess Food Request");
-                contact.textContent = "Contact Poster ✉️";
-
-                post.appendChild(description);
-                post.appendChild(contact);
-                container.appendChild(post);
-            });
-        }
-
-        showPosts();
-    </script>
-</body>
-</html>
+    <h2> Want to get started? </h2>
+    <div class="main-buttons">
+    <a href="needs.html" class="main-btn">Need Something</a>
+    <a href="donate.html" class="main-btn">Donate</a>
+</div>
