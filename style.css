@@ -365,3 +365,8 @@ h2 {
 .match-card p {
     overflow-wrap: anywhere;
 }
+header {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}

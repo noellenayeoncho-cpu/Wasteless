@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - WasteLess</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>WasteLess</h1>
+
+     <nav>
+        <a href="main.html">Home</a>
+        <a href="needs.html">Needs</a>
+        <a href="matches.html">Matches</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html">Login</a>
+        <a href="update.html">Update</a>
+        <a href="donate.html">Donate</a>
+    </nav>
+    </header>
+</header>
+<main class=""auth-container">
+<h2>Create Account</h2>
+
+<form id="signup-form">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" required>
+
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" required>
+
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" minlength="6" required>
+
+            <label for="signup-type">Account Type</label>
+            <select id="signup-type" required>
+                <option value="">Choose an account type</option>
+                <option value="Food Donor">Person/Family</option>
+                <option value="Organization in Need">Organization</option>
+            </select>
+
+            <label for="signup-organization">Organization Name</label>
+            <input type="text" id="signup-organization" 
+
+            <button type="submit">Create Account</button>
+
+            <p id="signup-message"></p>
+        </form>
+
+        <p>Already have an account?
+            <a href="login.html">Log In</a>
+        </p>
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+</html>
+</main>
+    
