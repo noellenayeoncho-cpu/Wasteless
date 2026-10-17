@@ -328,3 +328,40 @@ h2 {
     white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
+
+.matches-container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.matches-container h2 {
+    text-align: center;
+}
+
+.matches-container > p {
+    text-align: center;
+}
+
+#matches-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.match-card {
+    background: white;
+    border: 2px solid #b6d0fa;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.match-card h3 {
+    color: #26966b;
+}
+
+.match-card p {
+    overflow-wrap: anywhere;
+}
