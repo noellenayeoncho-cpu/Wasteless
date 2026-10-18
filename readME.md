@@ -72,6 +72,4 @@ More detailed user profiles and matching options.
 
 Our Mission
 
-WasteLess aims to make sharing easier, reduce waste, and help communities make better use of the resources they already have.
-
-Less waste. More help. A better community.
+WasteLess aims to help the less fortunate find necessities for free and decrease waste
