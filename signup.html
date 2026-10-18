@@ -3,59 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - WasteLess</title>
+    <title>Sign Up | WasteLess</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
         <h1>WasteLess</h1>
-
-     <nav>
-        <a href="main.html">Home</a>
-        <a href="needs.html">Needs</a>
-        <a href="matches.html">Matches</a>
-        <a href="profile.html">Profile</a>
-        <a href="login.html">Login</a>
-        <a href="donate.html">Donate</a>
-        <a href="messages.html">Messages</a>
-    </nav>
     </header>
-</header>
-<main class=""auth-container">
-<h2>Create Account</h2>
+    <nav>
+    <a href="main.html">Home</a>
+    <a href="needs.html">Needs</a>
+    <a href="matches.html">Matches</a>
+    <a href="profile.html">Profile</a>
+    <a href="login.html">Login</a>
+    <a href="donate.html">Donate</a>
+    <a href="messages.html">Messages</a>
+</nav>
 
-<form id="signup-form">
+
+    <main>
+        <h2>Create an Account</h2>
+        <p>Join WasteLess to give and receive donations!</p>
+
+        <form id="signup-form">
+
             <label for="signup-name">Full Name</label>
-            <input type="text" id="signup-name" required>
+            <input
+                type="text"
+                id="signup-name"
+                placeholder="Enter your name"
+                required
+            >
 
             <label for="signup-email">Email</label>
-            <input type="email" id="signup-email" required>
+            <input
+                type="email"
+                id="signup-email"
+                placeholder="Enter your email"
+                required
+            >
 
             <label for="signup-password">Password</label>
-            <input type="password" id="signup-password" minlength="6" required>
+            <input
+                type="password"
+                id="signup-password"
+                placeholder="At least 6 characters"
+                minlength="6"
+                required
+            >
 
             <label for="signup-type">Account Type</label>
             <select id="signup-type" required>
                 <option value="">Choose an account type</option>
-                <option value="Food Donor">Person/Family</option>
-                <option value="Organization in Need">Organization</option>
+                <option value="Individual">Individual</option>
+                <option value="Organization">Organization</option>
             </select>
 
-            <label for="signup-organization">Organization Name</label>
-            <input type="text" id="signup-organization" 
+            <div id="organization-field" hidden>
+                <label for="signup-organization">
+                    Organization Name
+                </label>
+                <input
+                    type="text"
+                    id="signup-organization"
+                    placeholder="Enter organization name"
+                >
+            </div>
 
-            <button type="submit">Create Account</button>
+            <button type="submit" id="signup-button">
+                Create Account
+            </button>
 
             <p id="signup-message"></p>
+
         </form>
 
         <p>Already have an account?
-            <a href="login.html">Log In</a>
+            <a href="login.html">Log in</a>
         </p>
+
+        <p><a href="main.html">Back to Home</a></p>
     </main>
 
-    <script src="auth.js"></script>
+    <script type="module" src="signup.js"></script>
+
 </body>
 </html>
-</main>
-    

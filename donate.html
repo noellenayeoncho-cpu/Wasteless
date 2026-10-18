@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WasteLess</title>
+    <title>Donate | WasteLess</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -10,7 +11,7 @@
         <h1>WasteLess</h1>
     </header>
 
-     <nav>
+    <nav>
         <a href="main.html">Home</a>
         <a href="needs.html">Needs</a>
         <a href="matches.html">Matches</a>
@@ -19,125 +20,32 @@
         <a href="donate.html">Donate</a>
         <a href="messages.html">Messages</a>
     </nav>
-    <h2> Donate</h2>
-<button class="floating-add" onclick="togglePost()">+</button>
 
-<div id="post-popup" class="post-popup">
-    <h3>Share a Donation</h3>
-    <textarea id="post-text" placeholder="Wanna donate?"></textarea>
-    <button onclick="addPost()">Post</button>
-</div>
+    <h2>Donate</h2>
 
-<div id="posts"></div>
+    <button class="floating-add" onclick="togglePost()">+</button>
 
+    <div id="post-popup" class="post-popup" style="display: none;">
+        <h3>Share a Donation</h3>
 
-<button class="floating-add" onclick="togglePost()">+</button>
+        <textarea
+            id="post-text"
+            placeholder="What do you want to donate?"
+        ></textarea>
 
-<div id="post-popup" class="post-popup">
-    <h3>Share a Donation</h3>
+        <label for="post-image">Picture URL (optional):</label>
+<input
+    type="url"
+    id="post-image"
+    placeholder="Paste an image link here..."
+>
 
-    <textarea id="post-text" placeholder="What do you want to donate?"></textarea>
+        <button onclick="addPost()">Post</button>
+        <button onclick="togglePost()">Cancel</button>
+    </div>
 
-    <label for="post-image">Upload a picture (optional):</label>
-    <input type="file" id="post-image" accept="image/*">
+    <div id="posts"></div>
 
-    <button onclick="addPost()">Post</button>
-</div>
-
-<div id="posts"></div>
-
-<script>
-    function togglePost() {
-        const popup = document.getElementById("post-popup");
-        popup.style.display =
-            popup.style.display === "block" ? "none" : "block";
-    }
-
-    function getSavedData(key) {
-        try {
-            let data = JSON.parse(localStorage.getItem(key));
-            return Array.isArray(data) ? data : [];
-        } catch {
-            return [];
-        }
-    }
-
-    function addPost() {
-        const input = document.getElementById("post-text");
-        const imageInput = document.getElementById("post-image");
-        const text = input.value.trim();
-        const file = imageInput.files[0];
-
-        if (text === "" && !file) return;
-
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                savePost(text, reader.result);
-            };
-
-            reader.readAsDataURL(file);
-        } else {
-            savePost(text, "");
-        }
-    }
-
-    function savePost(text, image) {
-        let posts = getSavedData("donationPosts");
-
-        posts.unshift({
-            text: text,
-            image: image
-        });
-
-        try {
-            localStorage.setItem(
-                "donationPosts",
-                JSON.stringify(posts)
-            );
-        } catch {
-            alert("This image is too large to save. Try a smaller picture.");
-            return;
-        }
-
-        document.getElementById("post-text").value = "";
-        document.getElementById("post-image").value = "";
-        document.getElementById("post-popup").style.display = "none";
-
-        showPosts();
-    }
-
-    function showPosts() {
-        const container = document.getElementById("posts");
-        const posts = getSavedData("donationPosts");
-
-        container.innerHTML = "";
-
-        posts.forEach(function(item) {
-            const post = document.createElement("div");
-            post.className = "simple-post";
-
-            const text = document.createElement("p");
-            text.textContent = typeof item === "string"
-                ? item
-                : item.text;
-
-            post.appendChild(text);
-
-            if (item.image) {
-                const img = document.createElement("img");
-                img.src = item.image;
-                img.alt = "Donation item";
-                img.className = "donation-image";
-                post.appendChild(img);
-            }
-
-            container.appendChild(post);
-        });
-    }
-
-    showPosts();
-</script>
-
-
+    <script type="module" src="donate.js"></script>
+</body>
+</html>

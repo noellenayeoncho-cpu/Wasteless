@@ -445,3 +445,40 @@ h2 {
     border-radius: 15px;
     overflow-wrap: anywhere;
 }
+.match-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 22px;
+    margin: 20px auto;
+    max-width: 650px;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px #263d3215;
+}
+
+.match-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.match-profile-picture {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #d7e5d2;
+}
+
+.match-user-name {
+    font-weight: 600;
+    color: #263d32;
+}
+
+.impact-section textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 10px;
+}

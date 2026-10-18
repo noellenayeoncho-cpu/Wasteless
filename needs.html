@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,79 +22,24 @@
         <a href="messages.html">Messages</a>
     </nav>
 
-    <h1>Needs</h1>
+    <h2>Needs</h2>
 
     <button class="floating-add" onclick="togglePost()">+</button>
 
     <div id="post-popup" class="post-popup" style="display: none;">
         <h3>What do you need?</h3>
-        <textarea id="post-text" placeholder="Necessities..."></textarea>
+
+        <textarea
+            id="post-text"
+            placeholder="Describe what you need..."
+        ></textarea>
+
         <button onclick="addPost()">Post</button>
         <button onclick="togglePost()">Cancel</button>
     </div>
 
     <div id="posts"></div>
 
-    <script>
-        function togglePost() {
-            const popup = document.getElementById("post-popup");
-
-            popup.style.display =
-                popup.style.display === "block" ? "none" : "block";
-        }
-
-        function addPost() {
-            const input = document.getElementById("post-text");
-            const text = input.value.trim();
-
-            if (text === "") {
-                alert("Please describe what you need!");
-                return;
-            }
-
-            let posts = JSON.parse(
-                localStorage.getItem("needPosts") ||
-                localStorage.getItem("needsPosts") ||
-                "[]"
-            );
-
-            posts.unshift(text);
-
-            localStorage.setItem("needPosts", JSON.stringify(posts));
-            localStorage.removeItem("needsPosts");
-
-            input.value = "";
-            document.getElementById("post-popup").style.display = "none";
-
-            showPosts();
-        }
-
-        function showPosts() {
-            const container = document.getElementById("posts");
-
-            let posts = JSON.parse(
-                localStorage.getItem("needPosts") ||
-                localStorage.getItem("needsPosts") ||
-                "[]"
-            );
-
-            container.innerHTML = "";
-
-            posts.forEach(function(text) {
-                const post = document.createElement("div");
-                post.className = "simple-post";
-                post.textContent = typeof text === "string"
-                    ? text
-                    : text.text || text.description || "";
-
-                container.appendChild(post);
-            });
-
-            localStorage.setItem("needPosts", JSON.stringify(posts));
-            localStorage.removeItem("needsPosts");
-        }
-
-        showPosts();
-    </script>
+    <script type="module" src="needs.js"></script>
 </body>
 </html>

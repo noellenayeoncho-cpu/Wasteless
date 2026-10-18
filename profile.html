@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | WasteLess</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>WasteLess</h1>
+    </header>
+
+   <nav>
+    <a href="main.html">Home</a>
+    <a href="needs.html">Needs</a>
+    <a href="matches.html">Matches</a>
+    <a href="profile.html">Profile</a>
+    <a href="login.html">Login</a>
+    <a href="donate.html">Donate</a>
+    <a href="messages.html">Messages</a>
+</nav>
+
+    <main class="profile-page">
+
+        <section class="profile-card">
+            <div class="profile-picture-container">
+                <img
+                    id="profile-picture"
+                    src="https://placehold.co/150x150?text=Profile"
+                    alt="Profile picture"
+                >
+            </div>
+
+            <h2 id="profile-name">Loading profile...</h2>
+            <p id="profile-bio">Loading your information...</p>
+            <p id="profile-location"></p>
+
+            <button id="edit-profile-btn" type="button">
+                Edit Profile
+            </button>
+
+            <button id="sign-out-btn" type="button">
+                Sign Out
+            </button>
+
+            <p id="profile-message" role="status"></p>
+        </section>
+
+        <section id="edit-profile-section" hidden>
+            <h2>Edit Your Profile</h2>
+
+            <form id="profile-form">
+                <label for="name">Display Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    maxlength="60"
+                    required
+                >
+
+                <label for="bio">About Me</label>
+                <textarea
+                    id="bio"
+                    maxlength="300"
+                    placeholder="Tell people a little about yourself!"
+                ></textarea>
+
+                <label for="location">General Location (optional)</label>
+                <input
+                    type="text"
+                    id="location"
+                    maxlength="100"
+                    placeholder="Example: Washington, DC"
+                >
+
+                <label for="photo-url">Profile Picture URL (optional)</label>
+                <input
+                    type="url"
+                    id="photo-url"
+                    placeholder="Paste an image URL"
+                >
+
+                <button type="submit">Save Profile</button>
+                <button id="cancel-edit-btn" type="button">
+                    Cancel
+                </button>
+            </form>
+        </section>
+
+        <section class="profile-listings">
+            <h2>My Donations</h2>
+            <div id="my-donations" class="listing-container">
+                <p>Loading donations...</p>
+            </div>
+        </section>
+
+        <section class="profile-listings">
+            <h2>Items I Need</h2>
+            <div id="my-needs" class="listing-container">
+                <p>Loading requests...</p>
+            </div>
+        </section>
+
+        <section id="other-profile-section" hidden>
+            <button id="back-to-profile-btn" type="button">
+                Back to My Profile
+            </button>
+
+            <h2>Community Member</h2>
+
+            <img
+                id="other-profile-picture"
+                src="https://placehold.co/150x150?text=Profile"
+                alt="Community member's profile picture"
+                width="120"
+                height="120"
+            >
+
+            <h3 id="other-profile-name"></h3>
+            <p id="other-profile-bio"></p>
+            <p id="other-profile-location"></p>
+
+            <h3>Their Donations</h3>
+            <div id="other-donations" class="listing-container"></div>
+
+            <h3>Items They Need</h3>
+            <div id="other-needs" class="listing-container"></div>
+        </section>
+
+    </main>
+
+    <script type="module" src="profile.js"></script>
+</body>
+</html>
