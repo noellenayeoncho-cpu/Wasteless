@@ -402,3 +402,46 @@ h2 {
     width: 100%;
     box-sizing: border-box;
 }
+
+#post-popup textarea {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 15px;
+    font-family: inherit;
+    padding: 12px;
+    border: 1px solid #cbd5c0;
+    border-radius: 10px;
+    resize: vertical;
+}
+
+#post-popup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+#post-image {
+    display: block;
+    margin-bottom: 15px;
+    max-width: 100%;
+}
+
+.donation-image {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.simple-post {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+    background-color: #e4eddf;
+    border-radius: 15px;
+    overflow-wrap: anywhere;
+}

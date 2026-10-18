@@ -17,6 +17,7 @@
         <a href="profile.html">Profile</a>
         <a href="login.html">Login</a>
         <a href="donate.html">Donate</a>
+        <a href="messages.html">Messages</a>
     </nav>
     <h2> Donate</h2>
 <button class="floating-add" onclick="togglePost()">+</button>
@@ -30,6 +31,21 @@
 <div id="posts"></div>
 
 
+<button class="floating-add" onclick="togglePost()">+</button>
+
+<div id="post-popup" class="post-popup">
+    <h3>Share a Donation</h3>
+
+    <textarea id="post-text" placeholder="What do you want to donate?"></textarea>
+
+    <label for="post-image">Upload a picture (optional):</label>
+    <input type="file" id="post-image" accept="image/*">
+
+    <button onclick="addPost()">Post</button>
+</div>
+
+<div id="posts"></div>
+
 <script>
     function togglePost() {
         const popup = document.getElementById("post-popup");
@@ -37,38 +53,91 @@
             popup.style.display === "block" ? "none" : "block";
     }
 
+    function getSavedData(key) {
+        try {
+            let data = JSON.parse(localStorage.getItem(key));
+            return Array.isArray(data) ? data : [];
+        } catch {
+            return [];
+        }
+    }
+
     function addPost() {
         const input = document.getElementById("post-text");
+        const imageInput = document.getElementById("post-image");
         const text = input.value.trim();
+        const file = imageInput.files[0];
 
-        if (text === "") return;
+        if (text === "" && !file) return;
 
-        let posts = JSON.parse(localStorage.getItem("donationPosts") || "[]");
-        posts.unshift(text);
-        localStorage.setItem("donationPosts", JSON.stringify(posts));
+        if (file) {
+            const reader = new FileReader();
 
-        input.value = "";
+            reader.onload = function() {
+                savePost(text, reader.result);
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            savePost(text, "");
+        }
+    }
+
+    function savePost(text, image) {
+        let posts = getSavedData("donationPosts");
+
+        posts.unshift({
+            text: text,
+            image: image
+        });
+
+        try {
+            localStorage.setItem(
+                "donationPosts",
+                JSON.stringify(posts)
+            );
+        } catch {
+            alert("This image is too large to save. Try a smaller picture.");
+            return;
+        }
+
+        document.getElementById("post-text").value = "";
+        document.getElementById("post-image").value = "";
         document.getElementById("post-popup").style.display = "none";
+
         showPosts();
     }
 
     function showPosts() {
         const container = document.getElementById("posts");
-        const posts = JSON.parse(localStorage.getItem("donationPosts") || "[]");
+        const posts = getSavedData("donationPosts");
 
         container.innerHTML = "";
 
-        posts.forEach(function(text) {
+        posts.forEach(function(item) {
             const post = document.createElement("div");
             post.className = "simple-post";
-            post.textContent = text;
+
+            const text = document.createElement("p");
+            text.textContent = typeof item === "string"
+                ? item
+                : item.text;
+
+            post.appendChild(text);
+
+            if (item.image) {
+                const img = document.createElement("img");
+                img.src = item.image;
+                img.alt = "Donation item";
+                img.className = "donation-image";
+                post.appendChild(img);
+            }
+
             container.appendChild(post);
         });
     }
 
     showPosts();
 </script>
-
-
 
 

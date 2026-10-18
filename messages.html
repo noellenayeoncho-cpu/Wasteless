@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages | WasteLess</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>WasteLess</h1>
+</header>
+
+<nav>
+    <a href="main.html">Home</a>
+    <a href="needs.html">Needs</a>
+    <a href="matches.html">Matches</a>
+    <a href="profile.html">Profile</a>
+    <a href="login.html">Login</a>
+    <a href="donate.html">Donate</a>
+</nav>
+
+<main class="messages-page">
+    <h2>Messages 💬</h2>
+    <p>Connect with your WasteLess community!</p>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <div class="message-input">
+        <input
+            type="text"
+            id="message-text"
+            placeholder="Type a message..."
+        >
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <button onclick="clearChat()">Clear Demo Chat</button>
+</main>
+
+<script>
+    function getMessages() {
+        try {
+            const messages = JSON.parse(
+                localStorage.getItem("wasteLessMessages") || "[]"
+            );
+
+            return Array.isArray(messages) ? messages : [];
+        } catch {
+            return [];
+        }
+    }
+
+    function sendMessage() {
+        const input = document.getElementById("message-text");
+        const text = input.value.trim();
+
+        if (text === "") return;
+
+        const messages = getMessages();
+
+        messages.push({
+            text: text,
+            sender: "You",
+            time: new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit"
+            })
+        });
+
+        localStorage.setItem(
+            "wasteLessMessages",
+            JSON.stringify(messages)
+        );
+
+        input.value = "";
+        showMessages();
+    }
+
+    function showMessages() {
+        const chat = document.getElementById("chat-box");
+        chat.innerHTML = "";
+
+        getMessages().forEach(function(message) {
+            const bubble = document.createElement("div");
+            bubble.className = "message-bubble";
+
+            const content = document.createElement("p");
+            content.textContent = message.text;
+
+            const time = document.createElement("small");
+            time.textContent = message.time || "";
+
+            bubble.appendChild(content);
+            bubble.appendChild(time);
+            chat.appendChild(bubble);
+        });
+
+        chat.scrollTop = chat.scrollHeight;
+    }
+
+    function clearChat() {
+        if (confirm("Clear all demo messages?")) {
+            localStorage.removeItem("wasteLessMessages");
+            showMessages();
+        }
+    }
+
+    document.getElementById("message-text")
+        .addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+    showMessages();
+</script>
+
+</body>
+</html>
